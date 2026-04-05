@@ -50,6 +50,19 @@ app.use(express.json());
 
 // ── Routes ─────────────────────────────────────────────────
 
+app.get("/aditya", async (req, res) => {
+ 
+  try {
+ 
+    res.json({ message: `Welcome to the Aditya Bhosale Portfolio aditya` });
+    // res.json(products);
+  } catch (err) {
+    console.error(err);
+    res.json({ message: `Welcome to the Aditya Bhosale Portfolio aditya` });
+  }
+ 
+});
+
 app.get("/", async (req, res) => {
  
   try {
@@ -62,6 +75,7 @@ app.get("/", async (req, res) => {
   }
  
 });
+
 
 // Profile
 app.get("/api/profile", async (_req, res) => {
