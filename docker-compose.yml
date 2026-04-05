@@ -1,0 +1,41 @@
+services:
+
+  # ── Express API ──────────────────────────────────────────────
+  backend:
+    build:
+      context: ./portfolio-backend      
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"            # Exposed for direct access / debugging
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      FRONTEND_URL: http://localhost   # Frontend origin for CORS
+      PGHOST: ${PGHOST}
+      PGUSER: ${PGUSER}
+      PGDATABASE: ${PGDATABASE}
+      PGPASSWORD: ${PGPASSWORD}
+      PGPORT: ${PGPORT:-5432}
+      PGSSLMODE: ${PGSSLMODE:-require}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ── React + Nginx ────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./portfolio-frontend
+      dockerfile: Dockerfile
+      args:
+        # In Docker Compose, /api is proxied by Nginx to the backend service,
+        # so VITE_API_URL stays empty — requests just go to /api/...
+        VITE_API_URL: ""
+    ports:
+      - "80:80"                # App available at http://localhost
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
