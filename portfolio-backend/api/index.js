@@ -50,7 +50,7 @@ app.use(express.json());
 
 // ── Routes ─────────────────────────────────────────────────
 
-app.get("/aditya", async (req, res) => {
+app.get("/aditya/profile", async (req, res) => {
  
   try {
  
