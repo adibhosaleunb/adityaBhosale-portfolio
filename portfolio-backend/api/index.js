@@ -65,23 +65,25 @@ app.get("/", async (req, res) => {
 
 // Profile
 app.get("/api/profile", async (_req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM user_profile LIMIT 1");
-    res.json(result.rows[0]);
-  } catch {
-    res.json({
-      name: "Aditya Bhosale",
-      title:
-        "Full Stack Developer | IT Specialist | Java & Enterprise Application Engineer",
-      bio:
-        "Results-driven Full Stack Developer and IT Specialist with over six years of experience in full stack development, application support, and SDLC-driven delivery.",
-      avatar_url: "/assets/photos/Aditya_home.png",
-      location: "Fredericton, NB, Canada",
-      email: "adibhosale06@gmail.com",
-      github_url: "https://github.com/adibhosaleunb",
-      linkedin_url: "https://linkedin.com/in/adibhosale06",
-    });
-  }
+  // try {
+  //   const result = await pool.query("SELECT * FROM user_profile LIMIT 1");
+  //   res.json(result.rows[0]);
+  // } catch {
+  //   res.json({
+  //     name: "Aditya Bhosale",
+  //     title:
+  //       "Full Stack Developer | IT Specialist | Java & Enterprise Application Engineer",
+  //     bio:
+  //       "Results-driven Full Stack Developer and IT Specialist with over six years of experience in full stack development, application support, and SDLC-driven delivery.",
+  //     avatar_url: "/assets/photos/Aditya_home.png",
+  //     location: "Fredericton, NB, Canada",
+  //     email: "adibhosale06@gmail.com",
+  //     github_url: "https://github.com/adibhosaleunb",
+  //     linkedin_url: "https://linkedin.com/in/adibhosale06",
+  //   });
+  // }
+
+   res.json({ message: `Welcome to the Aditya Bhosale Portfolio /api/portfolio` });
 });
 
 // Posts
