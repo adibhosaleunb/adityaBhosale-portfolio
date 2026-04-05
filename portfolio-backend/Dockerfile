@@ -12,4 +12,4 @@ COPY server.ts tsconfig.json ./
 
 EXPOSE 4000
 
-CMD ["node", "--import", "tsx/esm", "server.ts"]
+CMD ["node", "--import", "tsx/esm", "index.ts"]
