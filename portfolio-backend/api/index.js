@@ -50,8 +50,22 @@ app.use(express.json());
 
 // ── Routes ─────────────────────────────────────────────────
 
-app.get("/aditya/profile", async (req, res) => {
+app.get("/", async (req, res) => {
  
+  try {
+ 
+    res.json({ message: `Welcome to the Aditya Bhosale Portfolio` });
+    // res.json(products);
+  } catch (err) {
+    console.error(err);
+    res.json({ message: `Welcome to the Aditya Bhosale Portfolio` });
+  }
+ 
+});
+
+
+// Profile
+app.get("/aditya/profile", async (_req, res) => {
   try {
     const result = await pool.query("SELECT * FROM user_profile LIMIT 1");
     res.json(result.rows[0]);
@@ -69,48 +83,10 @@ app.get("/aditya/profile", async (req, res) => {
       linkedin_url: "https://linkedin.com/in/adibhosale06",
     });
   }
- 
-});
-
-app.get("/", async (req, res) => {
- 
-  try {
- 
-    res.json({ message: `Welcome to the Aditya Bhosale Portfolio` });
-    // res.json(products);
-  } catch (err) {
-    console.error(err);
-    res.json({ message: `Welcome to the Aditya Bhosale Portfolio` });
-  }
- 
-});
-
-
-// Profile
-app.get("/api/profile", async (_req, res) => {
-  // try {
-  //   const result = await pool.query("SELECT * FROM user_profile LIMIT 1");
-  //   res.json(result.rows[0]);
-  // } catch {
-  //   res.json({
-  //     name: "Aditya Bhosale",
-  //     title:
-  //       "Full Stack Developer | IT Specialist | Java & Enterprise Application Engineer",
-  //     bio:
-  //       "Results-driven Full Stack Developer and IT Specialist with over six years of experience in full stack development, application support, and SDLC-driven delivery.",
-  //     avatar_url: "/assets/photos/Aditya_home.png",
-  //     location: "Fredericton, NB, Canada",
-  //     email: "adibhosale06@gmail.com",
-  //     github_url: "https://github.com/adibhosaleunb",
-  //     linkedin_url: "https://linkedin.com/in/adibhosale06",
-  //   });
-  // }
-
-   res.json({ message: `Welcome to the Aditya Bhosale Portfolio /api/portfolio` });
 });
 
 // Posts
-app.get("/api/posts", async (_req, res) => {
+app.get("/aditya/posts", async (_req, res) => {
   try {
     const result = await pool.query(
       "SELECT * FROM posts ORDER BY published_at DESC"
@@ -131,7 +107,7 @@ app.get("/api/posts", async (_req, res) => {
 });
 
 // Projects
-app.get("/api/projects", async (_req, res) => {
+app.get("/aditya/projects", async (_req, res) => {
   try {
     const result = await pool.query(
       "SELECT * FROM projects ORDER BY created_at DESC"
@@ -154,7 +130,7 @@ app.get("/api/projects", async (_req, res) => {
 });
 
 // Experience
-app.get("/api/experience", async (_req, res) => {
+app.get("/aditya/experience", async (_req, res) => {
   try {
     const result = await pool.query(
       "SELECT * FROM experience ORDER BY start_date DESC"
@@ -174,7 +150,7 @@ app.get("/api/experience", async (_req, res) => {
 });
 
 // Skills
-app.get("/api/skills", async (_req, res) => {
+app.get("/aditya/skills", async (_req, res) => {
   try {
     const result = await pool.query("SELECT * FROM skills");
     res.json(result.rows);
@@ -187,7 +163,7 @@ app.get("/api/skills", async (_req, res) => {
 });
 
 // Stats
-app.get("/api/stats", async (_req, res) => {
+app.get("/aditya/stats", async (_req, res) => {
   try {
     const result = await pool.query("SELECT * FROM stats");
     res.json(result.rows);
@@ -200,7 +176,7 @@ app.get("/api/stats", async (_req, res) => {
 });
 
 // Education
-app.get("/api/education", async (_req, res) => {
+app.get("/aditya/education", async (_req, res) => {
   try {
     const result = await pool.query(
       "SELECT * FROM education ORDER BY period DESC"
@@ -218,7 +194,7 @@ app.get("/api/education", async (_req, res) => {
 });
 
 // UI Config (FIXED JS VERSION)
-app.get("/api/ui-config", async (_req, res) => {
+app.get("/aditya/ui-config", async (_req, res) => {
   try {
     const result = await pool.query("SELECT * FROM ui_config");
 
@@ -237,7 +213,7 @@ app.get("/api/ui-config", async (_req, res) => {
 });
 
 // Resume Download
-app.get("/api/download-resume", (_req, res) => {
+app.get("/aditya/download-resume", (_req, res) => {
   const resumePath = path.join(__dirname, "public", "resume.pdf");
 
   res.download(resumePath, "Aditya_Bhosale_Resume.pdf", (err) => {
@@ -246,7 +222,7 @@ app.get("/api/download-resume", (_req, res) => {
 });
 
 // Health
-app.get("/api/health", (_req, res) => {
+app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
